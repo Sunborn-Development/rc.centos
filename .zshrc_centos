@@ -1,0 +1,139 @@
+#===================================================================
+# ./.zshrc_min
+# zsh設定ファイル 最低限
+#===================================================================
+
+#-------------------------------------------------------------------
+# 補完
+#-------------------------------------------------------------------
+autoload -U compinit
+compinit
+
+# ディレクトリ名でcd
+setopt auto_cd
+# 移動したディレクトリを記録
+setopt auto_pushd
+# コマンド入力ミス補正
+setopt correct
+# 補完候補をつめて表示
+setopt list_packed
+# 補完候補が複数ある時に、一覧表示する
+setopt auto_list
+# 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完する
+setopt auto_menu
+setopt auto_param_slash
+setopt auto_param_keys
+setopt list_types
+
+#-------------------------------------------------------------------
+# Variable
+#-------------------------------------------------------------------
+export LANG=ja_JP.UTF-8
+
+#-------------------------------------------------------------------
+# 表示
+#-------------------------------------------------------------------
+
+# ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する
+setopt mark_dirs
+
+
+#-------------------------------------------------------------------
+# History
+#-------------------------------------------------------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
+setopt extended_history # 履歴ファイルに時刻を記録
+
+setopt hist_ignore_space
+setopt hist_ignore_dups
+setopt hist_no_store
+setopt share_history
+setopt hist_verify
+
+function history-all { history -E 1 }
+
+#-------------------------------------------------------------------
+# Prompt
+#-------------------------------------------------------------------
+autoload colors
+colors
+case ${UID} in
+0)
+  PROMPT="%{${fg[red]}%}%n[%h]%(!.#.$) %{${reset_color}%}"
+  RPROMPT="%{${fg[red]}%}[%~] %{${reset_color}%}"
+  PROMPT2="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
+  SPROMPT="%{${fg[red]}%}%_> %{${reset_color}%}"
+
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+  PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
+  ;;
+*)
+  PROMPT="%{${fg[green]}%}%n[%h]%(!.#.$) %{${reset_color}%}"
+  RPROMPT="%{${fg[green]}%}[%~] %{${reset_color}%}"
+  PROMPT2="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
+  SPROMPT="%{${fg[green]}%}%_> %{${reset_color}%}"
+
+  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+  PROMPT="%{${fg[yellow]}%}${HOST%%.*} ${PROMPT}"
+  ;;
+esac
+
+# ターミナルのタイトル「ユーザ@ホスト:カレントディレクトリ」
+if [ "$TERM" != dumb ]; then
+  precmd() {
+    echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+  }
+fi
+
+# キーバインドをEmacsライクに
+bindkey -e
+#bindkey -v
+
+# 履歴検索機能のショートカット
+#autoload history-search-end
+#zle -N history-beginning-search-backward-end history-search-end
+#zle -N history-beginning-search-forward-end history-search-end
+#bindkey "^P" history-beginning-search-backward-end
+#bindkey "^N" history-beginning-search-forward-end
+
+
+#-------------------------------------------------------------------
+# alias
+#-------------------------------------------------------------------
+alias ls="ls -hF --color=auto"
+alias la="ls -hAF --color=auto"
+alias ll="ls -tlhAF --color=auto"
+
+
+alias mv="mv -i"
+alias cp="cp"
+alias rm="rm -if"
+alias c="cat"
+alias sc="screen -R"
+
+alias vi="vim"
+
+alias grep="grep -n"
+
+alias -g G='| grep'
+
+alias -s txt=vim
+
+#-------------------------------------------------------------------
+# function
+#-------------------------------------------------------------------
+chpwd () {
+  ls
+  #echo -n "_`dirs`\\"
+}
+
+
+#-------------------------------------------------------------------
+# Initialize
+#-------------------------------------------------------------------
+echo '[.zshrc_centos was loaded!]'
+
+export PATH=/usr/local/bin/paco:$PATH
