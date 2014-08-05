@@ -13,47 +13,16 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-"NeoBundle 'Shougo/unite.vim'
-"NeoBundle 'Shougo/vimproc'
-"NeoBundle 'Shougo/vimfiler'
-"NeoBundle 'Shougo/vimshell'
-
-"NeoBundle 'mattn/webapi-vim'
-"NeoBundle 'mattn/gist-vim'
-
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'gregsexton/gitv'
 
 NeoBundle 'LustyExplorer'
-"NeoBundle 'yanktmp.vim'
 NeoBundle 'surround.vim'
 NeoBundle 'The-NERD-Commenter'
 NeoBundle 'ruby-matchit'
-"NeoBundle 'AutoComplPop'
 NeoBundle 'Shougo/neocomplcache'
-"NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'w0ng/vim-hybrid'
-
-NeoBundle 'jiangmiao/simple-javascript-indenter'
-NeoBundle 'pangloss/vim-javascript'
-"NeoBundle 'othree/html5.vim'
-"NeoBundle 'taichouchou2/vim-javascript' " JavaScriptシンタックス
 
 NeoBundle 'taichouchou2/html5.vim' " HTML5シンタックス
-"NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'cakebaker/scss-syntax.vim' " Sassシンタックス
-"NeoBundle 'StanAngeloff/php.vim' " PHPシンタックス
-
-"NeoBundle 'teramako/jscomplete-vim'
-
-NeoBundle 'tpope/vim-markdown'
-
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-
 
 filetype plugin indent on     " Required!
 " Brief help
@@ -83,8 +52,6 @@ set statusline=%F\ %m%=%{(&fenc!=''?&fenc:&enc).':'.&ff}%{(&list?'>':'')}\ %l-%v
 set foldmethod=manual
 
 "let g:hybrid_use_Xresources = 1
-colorscheme hybrid
-"colorscheme jellybeans
 
 "------------------------------------------------------------------
 " file
